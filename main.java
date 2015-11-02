@@ -2,8 +2,7 @@
  * FILENAME:
  * main.java
  *
- * DESCRIPTION:
- * 
+ * DESCRIPTION: A single-path linked list program.  Users can add elements, delete elements, get elements, or print the list.
  *
  * @version 1.00 2015-09-28
  * @author Eric Kuz 200245204
