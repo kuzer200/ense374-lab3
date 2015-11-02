@@ -4,7 +4,7 @@
  * ListElement.java
  *
  * DESCRIPTION:
- * This file encapsulates the nodes in a linked list.
+ * This file encapsulates the nodes of a linked list.
  *
  * @version 1.00 2015-11-01
  * @author Eric Kuz 200245204
@@ -14,18 +14,21 @@
 public class ListElement
 {
 	private ListElement next;
+	private ListElement prev;
 	private int data;
 
 	public ListElement()
 	{
 		data = 0;
 		next = null;
+		prev = null;
 	}
 
 	public ListElement(int data1)
 	{
 		data = data1;
 		next = null;
+		prev = null;
 	}
 
 	public void setData(int newdata)
@@ -46,5 +49,15 @@ public class ListElement
 	public ListElement getNext()
 	{
 		return next;
+	}
+
+	public void setPrev(ListElement newnext)
+	{
+		prev = newnext;
+	}
+
+	public ListElement getPrev()
+	{
+		return prev;
 	}
 };

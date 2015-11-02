@@ -24,9 +24,9 @@ public class LinkedList
 		elementCount = 0;
 	}
 
-//	Adds an element to the list.
-//	@arguments: integer value to add
-//	@returns: void
+//	adds an element to the list.
+//	@arguments: value of element to add
+//	@returns: none
 
 	public void addElement(int value)
 	{
@@ -41,15 +41,16 @@ public class LinkedList
 		else
 		{
 			tail.setNext(newNode);
+			newNode.setPrev(tail);
 			tail = newNode;
 		}
 
 		elementCount++;
 	}
 
-//	Prints the value of an element at a specified index.
-//	@arguments: index of element to get
-//	@returns: void
+//	gets an element from the list.
+//	@arguments: index value to get element from
+//	@returns: none
 
 	public void getElement(int index)
 	{
@@ -69,15 +70,17 @@ public class LinkedList
 		System.out.println("Value of node at index " + index + ": " + currentNode.getData());
 	}
 
-//	Deletes the element at a specified index.
-//	@arguments: index of element to delete
-//	@returns: void
+//	Deletes an element from the list.
+//	@arguments: index value to find element at
+//	@returns: none
 
 	public void deleteElement(int index)
 	{
+		System.out.println("deleting element at index " + index);
+
 		if (elementCount == 0)
 		{
-			System.out.println("Error: list is empty.");
+			System.out.println("Error: List is empty.");
 			return;
 		}
 
@@ -91,10 +94,29 @@ public class LinkedList
 		ListElement nodeToDelete = head;
 
 		if (index == 0)
+		{	
+			if (elementCount == 1)
+			{	
+				head = null;
+				tail = null;
+			}
+			else
+			{
+				head = currentNode.getNext();
+				head.setPrev(null);
+				nodeToDelete = null;
+				elementCount--;
+			}
+			return;
+		}
+
+		if (index == elementCount - 1)
 		{
-			head = currentNode.getNext();
-			nodeToDelete = null;
 			elementCount--;
+			nodeToDelete = tail;
+			tail = tail.getPrev();
+			tail.setNext(null);
+			nodeToDelete = null;
 			return;
 		}
 
@@ -107,15 +129,16 @@ public class LinkedList
 		}
 
 		currentNode.setNext(nodeToDelete.getNext());
+		currentNode.getNext().setPrev(currentNode);
 		nodeToDelete = null;	
 		elementCount--;	
 	}
 
-//	Prints the elements starting from the head node.
+//	Prints the list starting from the head node.
 //	@arguments: none
-//	@returns: void
+//	@returns: none
 
-	public void printLinkedList()
+	public void printLinkedListHead()
 	{
 		ListElement currElement = head;
 
@@ -129,6 +152,28 @@ public class LinkedList
 		{
 			System.out.print(currElement.getData() + " ");
 			currElement = currElement.getNext();
+		}
+		System.out.println("");
+	}
+
+//	Prints the list backwards starting from the tail node.
+//	@arguments: none
+//	@returns: none
+
+	public void printLinkedListTail()
+	{
+		ListElement currElement = tail;
+
+		if (tail == null)
+		{
+			System.out.println("The list is empty.");
+			return;
+		}
+
+		while (currElement != null)
+		{
+			System.out.print(currElement.getData() + " ");
+			currElement = currElement.getPrev();
 		}
 		System.out.println("");
 	}
